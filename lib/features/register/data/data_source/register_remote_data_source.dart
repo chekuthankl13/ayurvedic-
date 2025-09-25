@@ -8,9 +8,14 @@ import 'package:ayurvedic/features/register/data/model/branch_entity_model.dart'
 import 'package:ayurvedic/features/register/data/model/treatment_entity_model.dart';
 import 'package:http/http.dart';
 
+import '../model/register_param_model.dart';
+
 abstract interface class RegisterRemoteDataSource {
   Future<List<BranchEntityModel>> branch();
   Future<List<TreatmentEntityModel>> treatment();
+
+  Future<String> register({required RegisterParamModel param});
+
 }
 
 class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSource {
@@ -67,6 +72,25 @@ class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSource {
         } else {
           return list;
         }
+      } else {
+        throw ServerFailure(error: res.body);
+      }
+    } on Exception catch (e) {
+      throw ServerException(error: e.toString());
+    }
+  }
+  
+  @override
+  Future<String> register({required RegisterParamModel param})async {
+     try {
+      var res = await client.post(
+        Uri.parse(Config.registerUrl),
+        body: param.toJson(),
+        headers: getheaders(dbService.getToken()),
+      );
+     
+      if (res.statusCode == 200 || res.statusCode == 201) {
+        return "ok";
       } else {
         throw ServerFailure(error: res.body);
       }

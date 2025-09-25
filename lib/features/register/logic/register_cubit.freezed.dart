@@ -14,62 +14,30 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RegisterState {
 
- List<BranchEntity> get branch; List<TreatmentEntity> get treatment;
-/// Create a copy of RegisterState
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$RegisterStateCopyWith<RegisterState> get copyWith => _$RegisterStateCopyWithImpl<RegisterState>(this as RegisterState, _$identity);
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RegisterState&&const DeepCollectionEquality().equals(other.branch, branch)&&const DeepCollectionEquality().equals(other.treatment, treatment));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RegisterState);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(branch),const DeepCollectionEquality().hash(treatment));
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'RegisterState(branch: $branch, treatment: $treatment)';
+  return 'RegisterState()';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $RegisterStateCopyWith<$Res>  {
-  factory $RegisterStateCopyWith(RegisterState value, $Res Function(RegisterState) _then) = _$RegisterStateCopyWithImpl;
-@useResult
-$Res call({
- List<BranchEntity> branch, List<TreatmentEntity> treatment
-});
-
-
-
-
-}
-/// @nodoc
-class _$RegisterStateCopyWithImpl<$Res>
-    implements $RegisterStateCopyWith<$Res> {
-  _$RegisterStateCopyWithImpl(this._self, this._then);
-
-  final RegisterState _self;
-  final $Res Function(RegisterState) _then;
-
-/// Create a copy of RegisterState
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? branch = null,Object? treatment = null,}) {
-  return _then(_self.copyWith(
-branch: null == branch ? _self.branch : branch // ignore: cast_nullable_to_non_nullable
-as List<BranchEntity>,treatment: null == treatment ? _self.treatment : treatment // ignore: cast_nullable_to_non_nullable
-as List<TreatmentEntity>,
-  ));
-}
-
+class $RegisterStateCopyWith<$Res>  {
+$RegisterStateCopyWith(RegisterState _, $Res Function(RegisterState) __);
 }
 
 
@@ -87,11 +55,14 @@ extension RegisterStatePatterns on RegisterState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Initial value)?  initial,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Initial value)?  initial,TResult Function( Loading value)?  loading,TResult Function( Error value)?  error,TResult Function( Registered value)?  registered,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case Initial() when initial != null:
-return initial(_that);case _:
+return initial(_that);case Loading() when loading != null:
+return loading(_that);case Error() when error != null:
+return error(_that);case Registered() when registered != null:
+return registered(_that);case _:
   return orElse();
 
 }
@@ -109,11 +80,14 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Initial value)  initial,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Initial value)  initial,required TResult Function( Loading value)  loading,required TResult Function( Error value)  error,required TResult Function( Registered value)  registered,}){
 final _that = this;
 switch (_that) {
 case Initial():
-return initial(_that);}
+return initial(_that);case Loading():
+return loading(_that);case Error():
+return error(_that);case Registered():
+return registered(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -127,11 +101,14 @@ return initial(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Initial value)?  initial,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Initial value)?  initial,TResult? Function( Loading value)?  loading,TResult? Function( Error value)?  error,TResult? Function( Registered value)?  registered,}){
 final _that = this;
 switch (_that) {
 case Initial() when initial != null:
-return initial(_that);case _:
+return initial(_that);case Loading() when loading != null:
+return loading(_that);case Error() when error != null:
+return error(_that);case Registered() when registered != null:
+return registered(_that);case _:
   return null;
 
 }
@@ -148,10 +125,13 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( List<BranchEntity> branch,  List<TreatmentEntity> treatment)?  initial,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( List<BranchEntity> branch,  List<TreatmentEntity> treatment)?  initial,TResult Function()?  loading,TResult Function( String error)?  error,TResult Function()?  registered,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case Initial() when initial != null:
-return initial(_that.branch,_that.treatment);case _:
+return initial(_that.branch,_that.treatment);case Loading() when loading != null:
+return loading();case Error() when error != null:
+return error(_that.error);case Registered() when registered != null:
+return registered();case _:
   return orElse();
 
 }
@@ -169,10 +149,13 @@ return initial(_that.branch,_that.treatment);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( List<BranchEntity> branch,  List<TreatmentEntity> treatment)  initial,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( List<BranchEntity> branch,  List<TreatmentEntity> treatment)  initial,required TResult Function()  loading,required TResult Function( String error)  error,required TResult Function()  registered,}) {final _that = this;
 switch (_that) {
 case Initial():
-return initial(_that.branch,_that.treatment);}
+return initial(_that.branch,_that.treatment);case Loading():
+return loading();case Error():
+return error(_that.error);case Registered():
+return registered();}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -186,10 +169,13 @@ return initial(_that.branch,_that.treatment);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( List<BranchEntity> branch,  List<TreatmentEntity> treatment)?  initial,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( List<BranchEntity> branch,  List<TreatmentEntity> treatment)?  initial,TResult? Function()?  loading,TResult? Function( String error)?  error,TResult? Function()?  registered,}) {final _that = this;
 switch (_that) {
 case Initial() when initial != null:
-return initial(_that.branch,_that.treatment);case _:
+return initial(_that.branch,_that.treatment);case Loading() when loading != null:
+return loading();case Error() when error != null:
+return error(_that.error);case Registered() when registered != null:
+return registered();case _:
   return null;
 
 }
@@ -200,19 +186,19 @@ return initial(_that.branch,_that.treatment);case _:
 /// @nodoc
 
 
-class Initial implements RegisterState {
-  const Initial({required final  List<BranchEntity> branch, required final  List<TreatmentEntity> treatment}): _branch = branch,_treatment = treatment;
+class Initial extends RegisterState {
+  const Initial({required final  List<BranchEntity> branch, required final  List<TreatmentEntity> treatment}): _branch = branch,_treatment = treatment,super._();
   
 
  final  List<BranchEntity> _branch;
-@override List<BranchEntity> get branch {
+ List<BranchEntity> get branch {
   if (_branch is EqualUnmodifiableListView) return _branch;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_branch);
 }
 
  final  List<TreatmentEntity> _treatment;
-@override List<TreatmentEntity> get treatment {
+ List<TreatmentEntity> get treatment {
   if (_treatment is EqualUnmodifiableListView) return _treatment;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_treatment);
@@ -221,7 +207,7 @@ class Initial implements RegisterState {
 
 /// Create a copy of RegisterState
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $InitialCopyWith<Initial> get copyWith => _$InitialCopyWithImpl<Initial>(this, _$identity);
 
@@ -247,7 +233,7 @@ String toString() {
 /// @nodoc
 abstract mixin class $InitialCopyWith<$Res> implements $RegisterStateCopyWith<$Res> {
   factory $InitialCopyWith(Initial value, $Res Function(Initial) _then) = _$InitialCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
  List<BranchEntity> branch, List<TreatmentEntity> treatment
 });
@@ -266,7 +252,7 @@ class _$InitialCopyWithImpl<$Res>
 
 /// Create a copy of RegisterState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? branch = null,Object? treatment = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? branch = null,Object? treatment = null,}) {
   return _then(Initial(
 branch: null == branch ? _self._branch : branch // ignore: cast_nullable_to_non_nullable
 as List<BranchEntity>,treatment: null == treatment ? _self._treatment : treatment // ignore: cast_nullable_to_non_nullable
@@ -276,5 +262,135 @@ as List<TreatmentEntity>,
 
 
 }
+
+/// @nodoc
+
+
+class Loading extends RegisterState {
+  const Loading(): super._();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Loading);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'RegisterState.loading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class Error extends RegisterState {
+  const Error({required this.error}): super._();
+  
+
+ final  String error;
+
+/// Create a copy of RegisterState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ErrorCopyWith<Error> get copyWith => _$ErrorCopyWithImpl<Error>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Error&&(identical(other.error, error) || other.error == error));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,error);
+
+@override
+String toString() {
+  return 'RegisterState.error(error: $error)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ErrorCopyWith<$Res> implements $RegisterStateCopyWith<$Res> {
+  factory $ErrorCopyWith(Error value, $Res Function(Error) _then) = _$ErrorCopyWithImpl;
+@useResult
+$Res call({
+ String error
+});
+
+
+
+
+}
+/// @nodoc
+class _$ErrorCopyWithImpl<$Res>
+    implements $ErrorCopyWith<$Res> {
+  _$ErrorCopyWithImpl(this._self, this._then);
+
+  final Error _self;
+  final $Res Function(Error) _then;
+
+/// Create a copy of RegisterState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? error = null,}) {
+  return _then(Error(
+error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class Registered extends RegisterState {
+  const Registered(): super._();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Registered);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'RegisterState.registered()';
+}
+
+
+}
+
+
+
 
 // dart format on

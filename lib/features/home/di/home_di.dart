@@ -5,7 +5,7 @@ import 'package:ayurvedic/features/home/domain/usecase/load_patient_usecase.dart
 import 'package:ayurvedic/features/home/logic/home_cubit.dart';
 import 'package:get_it/get_it.dart';
 
-Future<void> authDi(GetIt sl) async {
+Future<void> homeDi(GetIt sl) async {
   sl.registerFactory(() => HomeCubit(sl()));
   sl.registerLazySingleton(() => LoadPatientUsecase(repository: sl()));
 

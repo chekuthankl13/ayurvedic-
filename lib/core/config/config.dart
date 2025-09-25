@@ -9,6 +9,9 @@ class Config {
 
   static const treatmentUrl = "${_baseUrl}PatientList";
 
+  static const registerUrl = "${_baseUrl}PatientUpdate";
+
+
 
 
 }

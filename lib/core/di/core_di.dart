@@ -1,5 +1,7 @@
 import 'package:ayurvedic/core/db/db_service.dart';
 import 'package:ayurvedic/features/auth/di/auth_di.dart';
+import 'package:ayurvedic/features/home/di/home_di.dart';
+import 'package:ayurvedic/features/register/di/register_di.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 var sl = GetIt.instance;
@@ -10,5 +12,9 @@ Future<void> diInit() async {
 
   //auth
   await authDi(sl);
+  //Home 
+  await homeDi(sl);
+  //register
+  await registerDi(sl);
   
 }
