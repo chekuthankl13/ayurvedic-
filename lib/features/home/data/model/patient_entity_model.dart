@@ -29,7 +29,7 @@ class PatientEntityModel extends PatientEntity {
             (x) => PatientDetailEntityModel.fromJson(x),
           ),
         ),
-        branch: BranchEntityModel.fromJson(json["branch"]),
+        branch:json["branch"]==null?null: BranchEntityModel.fromJson(json["branch"]),
         user: json["user"].toString(),
         payment: json["payment"].toString(),
         name: json["name"].toString(),

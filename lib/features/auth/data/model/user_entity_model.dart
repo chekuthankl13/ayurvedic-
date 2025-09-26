@@ -9,6 +9,14 @@ class UserEntityModel extends UserEntity {
     isSuperuser: json["is_superuser"],
     userDetails: UserDetailEntityModel.fromJson(json["user_details"]),
   );
+
+    Map<String, dynamic> toJson() => {
+    "status": status,
+    "message": message,
+    "token": token,
+    "is_superuser": isSuperuser,
+    "user_details": (userDetails as UserDetailEntityModel).toJson(),
+  };
 }
 
 class UserDetailEntityModel extends UserDetailEntity {
@@ -31,5 +39,24 @@ class UserDetailEntityModel extends UserDetailEntity {
     updatedAt:json["updated_at"].toString(),
     branch: json["branch"].toString(),
   );
+
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "last_login": lastLogin,
+    "name": name,
+    "phone": phone,
+    "address": address,
+    "mail": mail,
+    "username": username,
+    "password": password,
+    "password_text": passwordText,
+    "admin": admin,
+    "is_admin": isAdmin,
+    "is_active": isActive,
+    "created_at": createdAt,
+    "updated_at": updatedAt,
+    "branch": branch,
+  };
 
 }

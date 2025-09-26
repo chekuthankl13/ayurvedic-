@@ -45,7 +45,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     }
   }
 
-  register({
+  Future<Map<String, dynamic>> register({
     required name,
     exceutive,
     payment,
@@ -62,7 +62,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     treatments,
   }) async {
     try {
-      emit(RegisterState.loading());
+      // emit(RegisterState.loading());
       var res = await registerUsecase(
         RegisterParamModel(
           name: name,
@@ -75,20 +75,23 @@ class RegisterCubit extends Cubit<RegisterState> {
           advanceAmount: advanceAmount,
           dateEndTime: dateEndTime,
           id: "",
-          male: male,
+          male: treatments,
           balanceAmount: balanceAmount,
-          female: female,
+          female: treatments,
           branch: branch,
           treatments: treatments,
         ),
       );
 
-      res.fold(
-        (l) => emit(RegisterState.error(error: l.error)),
-        (r) => emit(RegisterState.registered()),
+      return res.fold(
+        (l) => {"status": "!ok", "error": l.error},
+        // emit(RegisterState.error(error: l.error))
+        (r) => {"status": "ok"},
+        //  emit(RegisterState.registered())
       );
     } catch (e) {
-      emit(RegisterState.error(error: e.toString()));
+      return {"status": "!ok", "error": e.toString()};
+      // emit(RegisterState.error(error: e.toString()));
     }
   }
 }

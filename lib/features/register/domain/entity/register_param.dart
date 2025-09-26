@@ -11,10 +11,10 @@ abstract class RegisterParam {
   final String advanceAmount;
   final String dateEndTime;
   final String id;
-  final List<String> male;
-  final List<String> female;
+  final List<dynamic> male;
+  final List<dynamic> female;
   final String branch;
-  final List<String> treatments;
+  final List<dynamic> treatments;
 
   RegisterParam({
     required this.name,

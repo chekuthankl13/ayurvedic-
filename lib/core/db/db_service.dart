@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:ayurvedic/features/auth/data/model/user_entity_model.dart';
 import 'package:ayurvedic/features/auth/domain/entity/user_entity.dart';
@@ -8,23 +9,28 @@ class DbService {
   final _storage = GetStorage();
   String getToken() => _storage.read("token") ?? "";
 
- UserDetailEntity? getUserDetail() {
+  UserDetailEntity? getUserDetail() {
     String i = _storage.read("user_detail") ?? "";
 
+    log(i);
+
     if (i.isNotEmpty) {
-      return UserDetailEntityModel.fromJson(jsonDecode(i));
+      final userDetail = UserDetailEntityModel.fromJson(jsonDecode(i));
+      return userDetail;
     } else {
       return null;
     }
   }
-
 
   //save login info
   saveCredentials({required UserEntity user}) async {
     await Future.wait([
       _storage.write("token", user.token),
       // _storage.write("experies_at",user. experiesAt),
-      _storage.write("user_detail", user.userDetails),
+      _storage.write(
+        "user_detail",
+        jsonEncode((user.userDetails as UserDetailEntityModel).toJson()),
+      ),
     ]);
   }
 

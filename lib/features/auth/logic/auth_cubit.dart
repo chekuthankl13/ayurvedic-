@@ -10,11 +10,11 @@ class AuthCubit extends Cubit<AuthState> {
   final LoginUsecase loginUsecase;
   AuthCubit(this.loginUsecase) : super(AuthState.initial());
 
-   login({mobile, password}) async {
+   login({email, password}) async {
     try {
       emit(AuthState.loading());
       var res = await loginUsecase(
-        AuthParamModel(username: mobile, password: password),
+        AuthParamModel(username: email, password: password),
       );
       res.fold(
         (l) => emit(AuthState.error(error: l.error)),

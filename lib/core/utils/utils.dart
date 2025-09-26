@@ -1,5 +1,6 @@
 import 'package:ayurvedic/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 sW(context) => MediaQuery.of(context).size.width;
 sH(context) => MediaQuery.of(context).size.height;
@@ -67,11 +68,14 @@ scafolderror(String error, txt, {required onPressed}) {
   );
 }
 
-Widget loading({clr =  AppTheme.greenClr}) => Center(
-  child: CircularProgressIndicator(
-    strokeWidth: .5,
-    strokeAlign: 10,
-    color: clr,
+Widget loading({clr = AppTheme.greyClr}) => Center(
+  child: Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: CircularProgressIndicator(
+      strokeWidth: .5,
+      strokeAlign: 10,
+      color: clr,
+    ),
   ),
 );
 
@@ -97,9 +101,7 @@ Widget itemEmpty(context, txt, {isCenter = true}) => Column(
   ],
 );
 
-isTab(context) => sW(context) >= 700 && sW(context) <= 1200 ? true : false;
 
-isDesktop(context) => sW(context) >= 1200 ? true : false;
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -114,11 +116,19 @@ bool onWillPop(context, lastPressed) {
   return true; // exit app
 }
 
-
-
 bool isValidEmail(String email) {
   final RegExp emailRegex = RegExp(
     r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
   );
   return emailRegex.hasMatch(email);
+}
+
+
+
+String formatDateTime(String rawDateTime) {
+  
+  DateTime parsedDate = DateTime.parse(rawDateTime);
+
+  
+  return DateFormat('dd/MM/yyyy').format(parsedDate);
 }

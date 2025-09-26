@@ -28,7 +28,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
 
       if (res.statusCode == 200) {
         var resBody = jsonDecode(res.body);
-        if (resBody['success'] == true) {
+        if (resBody['status'] == true) {
           await dbService.saveCredentials(
             user: UserEntityModel.fromJson(resBody),
           );

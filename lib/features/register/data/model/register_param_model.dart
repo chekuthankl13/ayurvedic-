@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import '../../domain/entity/register_param.dart';
 
@@ -40,7 +39,7 @@ class RegisterParamModel extends RegisterParam {
         treatments: data.treatments,
       );
 
-  Map<String, String> toJson() => {
+  Map<String, dynamic> toJson() => {
     'name': name,
     'excecutive': exceutive,
     'payment': payment,
@@ -53,12 +52,12 @@ class RegisterParamModel extends RegisterParam {
     'date_nd_time': dateEndTime,
     //eg:01/02/2024-10:24 AM
     'id': "", //(Pass empty string to this key)
-    'male': jsonEncode(male), // (List of selected treatment ids
+    'male': male, // (List of selected treatment ids
     //separated by commas eg: 2,3,4)
-    'female': jsonEncode(female), //(List of selected treatment ids
+    'female': female, //(List of selected treatment ids
     //separated by commas eg: 2,3,4)
     'branch': branch,
-    'treatments': jsonEncode(treatments), //(List of selected treatment
+    'treatments': treatments, //(List of selected treatment
     //ids separated by commas eg: 2,3,4)
   };
 }

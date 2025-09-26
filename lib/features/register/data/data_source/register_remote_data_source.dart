@@ -15,7 +15,6 @@ abstract interface class RegisterRemoteDataSource {
   Future<List<TreatmentEntityModel>> treatment();
 
   Future<String> register({required RegisterParamModel param});
-
 }
 
 class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSource {
@@ -24,10 +23,9 @@ class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSource {
 
   RegisterRemoteDataSourceImpl({required this.dbService, required this.client});
   getheaders(token) => {'Authorization': 'Bearer $token'};
- 
- 
+
   @override
-  Future<List<BranchEntityModel>> branch() async{
+  Future<List<BranchEntityModel>> branch() async {
     try {
       List<BranchEntityModel> list = [];
       var res = await client.get(
@@ -54,7 +52,7 @@ class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSource {
   }
 
   @override
-  Future<List<TreatmentEntityModel>> treatment() async{
+  Future<List<TreatmentEntityModel>> treatment() async {
     try {
       List<TreatmentEntityModel> list = [];
       var res = await client.get(
@@ -79,16 +77,16 @@ class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSource {
       throw ServerException(error: e.toString());
     }
   }
-  
+
   @override
-  Future<String> register({required RegisterParamModel param})async {
-     try {
+  Future<String> register({required RegisterParamModel param}) async {
+    try {
       var res = await client.post(
         Uri.parse(Config.registerUrl),
-        body: param.toJson(),
+        body: jsonEncode(param.toJson()),
         headers: getheaders(dbService.getToken()),
       );
-     
+
       if (res.statusCode == 200 || res.statusCode == 201) {
         return "ok";
       } else {

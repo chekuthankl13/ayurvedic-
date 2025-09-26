@@ -1,7 +1,7 @@
 abstract class PatientEntity {
   final int id;
   final List<PatientDetailEntity> patientdetails;
-  final BranchEntity branch;
+  final BranchEntity? branch;
   final String user;
   final String payment;
   final String name;
